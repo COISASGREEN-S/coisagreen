@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - COISAS GREEN</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #e0ffe0, #f0fff0);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .login-box {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      width: 300px;
+      text-align: center;
+    }
+    input {
+      width: 100%;
+      padding: 0.8rem;
+      margin: 1rem 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background-color: #009900;
+      color: white;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 5px;
+      width: 100%;
+      cursor: pointer;
+    }
+    .error {
+      color: red;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h2>Entrar no Painel</h2>
+    <input type="password" id="password" placeholder="Digite sua senha" />
+    <button onclick="validatePassword()">Entrar</button>
+    <div id="error" class="error"></div>
+  </div>
+
+  <script>
+    function validatePassword() {
+      const password = document.getElementById("password").value;
+      const error = document.getElementById("error");
+      const now = new Date();
+      let expiryDate;
+
+      if (password === "Q!4bL9#r") {
+        expiryDate = new Date(now);
+        expiryDate.setFullYear(expiryDate.getFullYear() + 1); // 1 year
+      } else if (password === "M@3zV6*w") {
+        expiryDate = new Date(now);
+        expiryDate.setMonth(expiryDate.getMonth() + 1); // 1 month
+      } else if (password === "D7$kL2#m") {
+        expiryDate = new Date(now);
+        expiryDate.setDate(expiryDate.getDate() + 7); // 1 week
+      } else {
+        error.textContent = "Senha incorreta.";
+        return;
+      }
+
+      // Save to localStorage
+      localStorage.setItem("subscriptionExpiry", expiryDate.toISOString());
+      window.location.href = "dashboard.html";
+    }
+
+    // If already logged in, redirect to dashboard
+    if (localStorage.getItem("subscriptionExpiry")) {
+      window.location.href = "dashboard.html";
+    }
+  </script>
+</body>
+</html>
