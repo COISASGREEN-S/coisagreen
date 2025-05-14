@@ -132,15 +132,17 @@
   <script>
     function startCountdown() {
       const countdownEl = document.getElementById("countdown");
-      const expiry = parseInt(localStorage.getItem("subscriptionExpiry"), 10);
+      const expiryStr = localStorage.getItem("subscriptionExpiry");
 
-      if (!expiry || isNaN(expiry)) {
+      if (!expiryStr) {
         countdownEl.textContent = "Não ativo";
         return;
       }
 
+      const expiry = new Date(expiryStr);
+
       function updateTimer() {
-        const now = new Date().getTime();
+        const now = new Date();
         const diff = expiry - now;
 
         if (diff <= 0) {
