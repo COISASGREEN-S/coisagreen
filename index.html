@@ -1,9 +1,10 @@
+<!-- =================== LOGIN PAGE =================== -->
 <!DOCTYPE html>
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>COISAS GREEN - Login</title>
+  <title>COISAS - Login</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * {
@@ -14,7 +15,7 @@
     }
 
     body {
-      background: linear-gradient(135deg, #e6ffe6, #ffffff);
+      background: linear-gradient(135deg, #ffffff, #ffffff);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -29,9 +30,10 @@
     }
 
     .logo {
-      width: 80px;
+      width: 220px;
       animation: float 3s ease-in-out infinite;
       margin-bottom: 1rem;
+      font-weight: bold;
     }
 
     @keyframes float {
@@ -40,35 +42,14 @@
       100% { transform: translateY(0); }
     }
 
-    .brand {
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-
-    .brand h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #004d00;
-    }
-
-    .brand p {
-      color: #666;
-      font-size: 0.9rem;
-    }
-
-    .brand p span {
-      color: #007700;
-      font-weight: 600;
-    }
-
     .login-box {
       background: white;
-      border: 2px solid #00cc44;
+      border: 2px solid #0088cc;
       border-radius: 10px;
       padding: 2rem;
       max-width: 350px;
       width: 100%;
-      box-shadow: 0 10px 25px rgba(0, 128, 0, 0.1);
+      box-shadow: 0 10px 25px rgba(0, 136, 204, 0.1);
       transition: transform 0.3s ease;
     }
 
@@ -79,31 +60,21 @@
     .login-box input {
       width: 100%;
       padding: 0.75rem;
-      border: 1.5px solid #00cc44;
+      border: 1.5px solid #0088cc;
       border-radius: 8px;
       margin-top: 0.5rem;
       transition: border-color 0.3s;
     }
 
     .login-box input:focus {
-      border-color: #009933;
+      border-color: #006699;
       outline: none;
-    }
-
-    .login-box p {
-      font-size: 0.85rem;
-      margin-top: 0.5rem;
-      color: #333;
-    }
-
-    .login-box p strong {
-      color: #007700;
     }
 
     .login-box button {
       margin-top: 1rem;
       width: 100%;
-      background-color: #00cc44;
+      background-color: #0088cc;
       color: white;
       border: none;
       padding: 0.75rem;
@@ -114,7 +85,7 @@
     }
 
     .login-box button:hover {
-      background-color: #009933;
+      background-color: #006699;
     }
 
     .error {
@@ -122,28 +93,35 @@
       margin-top: 0.5rem;
       font-size: 0.85rem;
     }
+
+    .channel-info {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      color: #0088cc;
+      text-align: center;
+      font-weight: 600;
+    }
   </style>
 </head>
 <body>
 
   <img src="WhatsApp Image 2025-05-13 at 8.17.11 PM.jpeg" alt="Logo" class="logo" />
-  <div class="brand">
-    <h1>COISAS GREEN</h1>
-    <p>private channel <br><span>20.7K inscritos</span></p>
-  </div>
 
   <div class="login-box">
-    <input type="password" id="password" placeholder="Senha">
-    <p>Certifique-se de que é uma palavra-passe correta e ativada, se for pode prosseguir. O código expira em <strong>10min</strong></p>
+    <input type="password" id="password" placeholder="Digite seu código de acesso...">
     <div class="error" id="error-message"></div>
-    <button onclick="handleLogin()">Aceder</button>
+    <button onclick="handleLogin()">ATIVAR ACESSO</button>
+    <div class="channel-info">
+      <strong>private channel</strong><br>
+      20.7K inscritos
+    </div>
   </div>
 
   <script>
     const validCodes = {
-      "Q!4bL9#r": 365,  // 1 ano
-      "M@3zV6*w": 30,   // 1 mês
-      "D7$kL2#m": 7     // 1 semana
+      "Q!4bL9#r": 365,
+      "M@3zV6*w": 30,
+      "D7$kL2#m": 7
     };
 
     function handleLogin() {
@@ -151,19 +129,15 @@
       const errorBox = document.getElementById("error-message");
 
       if (validCodes[input]) {
-        const existingExpiry = localStorage.getItem("subscriptionExpiry");
-        if (!existingExpiry) {
-          const days = validCodes[input];
-          const expiryDate = new Date();
-          expiryDate.setDate(expiryDate.getDate() + days);
-          localStorage.setItem("subscriptionExpiry", expiryDate.toISOString());
-        }
+        const days = validCodes[input];
+        const expiryDate = new Date();
+        expiryDate.setDate(expiryDate.getDate() + days);
+        localStorage.setItem("subscriptionExpiry", expiryDate.toISOString());
         window.location.href = "dashboard.html";
       } else {
         errorBox.textContent = "Código incorreto ou expirado.";
       }
     }
   </script>
-
 </body>
 </html>
