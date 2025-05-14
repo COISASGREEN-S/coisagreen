@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>COISAS GREEN - Painel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #e0ffe0, #f0fff0);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #009900;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .logo {
+      height: 50px;
+      animation: float 3s ease-in-out infinite;
+      margin-bottom: 0.5rem;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+      100% { transform: translateY(0); }
+    }
+
+    .welcome {
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .subscription-timer {
+      font-size: 1rem;
+      margin-top: 0.5rem;
+      font-weight: 500;
+    }
+
+    main {
+      flex: 1;
+      padding: 2rem;
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      animation: fadeIn 1s ease-in;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .card h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #009900;
+      color: white;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="4cd408e5-950c-49a3-b903-270e1c1b8abc.png" alt="Logo" class="logo" />
+    <div class="welcome">Bem-vindo ao Painel COISAS GREEN</div>
+    <div class="subscription-timer" id="subscription-timer">
+      Sua assinatura expira em: <span id="countdown">Carregando...</span>
+    </div>
+  </header>
+
+  <main>
+    <a href="lock.html" class="card">
+      <h3>Previsões Recentes</h3>
+      <p>Confira as melhores dicas de apostas e análises do dia.</p>
+    </a>
+    <a href="lock.html" class="card">
+      <h3>Informações da Conta</h3>
+      <p>Veja os detalhes da sua assinatura e status de ativação.</p>
+    </a>
+    <a href="lock.html" class="card">
+      <h3>Suporte</h3>
+      <p>Precisa de ajuda? Fale com o suporte ou com a administração.</p>
+    </a>
+    <a href="lock.html" class="card">
+      <h3>Acesso Premium</h3>
+      <p>Atualize seu plano para desbloquear conteúdo VIP.</p>
+    </a>
+  </main>
+
+  <footer>
+    &copy; 2025 COISAS GREEN GRUPO VIP. Todos os direitos reservados.
+  </footer>
+
+  <script>
+    function startCountdown() {
+      const countdownEl = document.getElementById("countdown");
+      const expiry = localStorage.getItem("subscriptionExpiry");
+
+      if (!expiry) {
+        window.location.href = "login.html"; // Not logged in
+        return;
+      }
+
+      const expiryDate = new Date(expiry);
+
+      function updateTimer() {
+        const now = new Date();
+        const diff = expiryDate - now;
+
+        if (diff <= 0) {
+          countdownEl.textContent = "Expirado";
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        countdownEl.textContent = `${days}d ${hours}h ${minutes}min ${seconds}s`;
+      }
+
+      updateTimer();
+      setInterval(updateTimer, 1000);
+    }
+
+    startCountdown();
+  </script>
+</body>
+</html>
