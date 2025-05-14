@@ -1,4 +1,3 @@
-<!-- =================== DASHBOARD PAGE =================== -->
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -139,10 +138,10 @@
         return;
       }
 
-      const expiry = new Date(expiryStr);
+      const expiry = new Date(expiryStr).getTime();
 
       function updateTimer() {
-        const now = new Date();
+        const now = new Date().getTime();
         const diff = expiry - now;
 
         if (diff <= 0) {
