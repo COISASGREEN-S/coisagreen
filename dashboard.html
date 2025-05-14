@@ -1,9 +1,10 @@
+<!-- =================== DASHBOARD PAGE =================== -->
 <!DOCTYPE html>
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>COISAS GREEN - Painel</title>
+  <title>COISAS - Painel</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * {
@@ -14,14 +15,14 @@
     }
 
     body {
-      background: linear-gradient(135deg, #e0ffe0, #f0fff0);
+      background: linear-gradient(135deg, #e0f7ff, #f0fbff);
       display: flex;
       flex-direction: column;
       min-height: 100vh;
     }
 
     header {
-      background-color: #009900;
+      background-color: #ffffff;
       color: white;
       padding: 1rem 2rem;
       display: flex;
@@ -32,7 +33,7 @@
     }
 
     .logo {
-      height: 50px;
+      height: 120px;
       animation: float 3s ease-in-out infinite;
       margin-bottom: 0.5rem;
     }
@@ -44,14 +45,15 @@
     }
 
     .welcome {
+      color: black;
       font-size: 1.2rem;
       font-weight: 600;
     }
 
     .subscription-timer {
+      color: black;
       font-size: 1rem;
       margin-top: 0.5rem;
-      color: #ffffff;
       font-weight: 500;
     }
 
@@ -86,7 +88,7 @@
     footer {
       text-align: center;
       padding: 1rem;
-      background-color: #009900;
+      background-color: #0088cc;
       color: white;
     }
 
@@ -99,7 +101,7 @@
 <body>
   <header>
     <img src="WhatsApp Image 2025-05-13 at 8.17.11 PM.jpeg" alt="Logo" class="logo" />
-    <div class="welcome">Bem-vindo ao Painel COISAS GREEN</div>
+    <div class="welcome">Bem-vindo ao Painel COISAS</div>
     <div class="subscription-timer">
       Sua assinatura expira em: <span id="countdown">Carregando...</span>
     </div>
@@ -125,7 +127,7 @@
   </main>
 
   <footer>
-    &copy; 2025 COISAS GREEN GRUPO VIP. Todos os direitos reservados.
+    &copy; 2025 COISAS GRUPO VIP. Todos os direitos reservados.
   </footer>
 
   <script>
@@ -138,10 +140,10 @@
         return;
       }
 
-      const expiry = new Date(expiryStr).getTime();
+      const expiry = new Date(expiryStr);
 
       function updateTimer() {
-        const now = new Date().getTime();
+        const now = new Date();
         const diff = expiry - now;
 
         if (diff <= 0) {
