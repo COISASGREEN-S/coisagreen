@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>COISAS GREEN - Login</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
@@ -14,123 +14,153 @@
     }
 
     body {
-      background-color: #ffffff;
+      background: linear-gradient(135deg, #e6ffe6, #ffffff);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
-      padding: 1rem;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .logo {
-      height: 70px;
+      width: 80px;
+      animation: float 3s ease-in-out infinite;
       margin-bottom: 1rem;
     }
 
-    .title {
-      font-size: 1.8rem;
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+      100% { transform: translateY(0); }
+    }
+
+    .brand {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .brand h1 {
+      font-size: 2rem;
       font-weight: 700;
-      text-align: center;
+      color: #004d00;
     }
 
-    .subtitle {
-      text-align: center;
-      font-size: 1rem;
-      color: #333;
-      margin-top: 0.3rem;
+    .brand p {
+      color: #666;
+      font-size: 0.9rem;
     }
 
-    .followers {
-      color: #007bff;
+    .brand p span {
+      color: #007700;
       font-weight: 600;
-      margin-top: 0.2rem;
-      text-align: center;
     }
 
     .login-box {
-      background-color: #f9f9f9;
-      border: 2px solid #0099cc;
-      border-radius: 8px;
+      background: white;
+      border: 2px solid #00cc44;
+      border-radius: 10px;
       padding: 2rem;
-      margin-top: 1.5rem;
-      width: 100%;
       max-width: 350px;
-      text-align: center;
-    }
-
-    input[type="password"] {
       width: 100%;
-      padding: 0.6rem;
-      font-size: 1rem;
+      box-shadow: 0 10px 25px rgba(0, 128, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .login-box:hover {
+      transform: translateY(-2px);
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1.5px solid #00cc44;
+      border-radius: 8px;
       margin-top: 0.5rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
+      transition: border-color 0.3s;
     }
 
-    .instruction {
+    .login-box input:focus {
+      border-color: #009933;
+      outline: none;
+    }
+
+    .login-box p {
       font-size: 0.85rem;
-      color: #555;
-      margin: 0.8rem 0;
+      margin-top: 0.5rem;
+      color: #333;
     }
 
-    .instruction strong {
-      color: #000;
+    .login-box p strong {
+      color: #007700;
     }
 
-    .error-message {
-      color: red;
-      font-size: 0.85rem;
-      margin-bottom: 0.8rem;
-    }
-
-    button {
-      background-color: #007bff;
+    .login-box button {
+      margin-top: 1rem;
+      width: 100%;
+      background-color: #00cc44;
       color: white;
-      padding: 0.6rem 1.2rem;
       border: none;
-      border-radius: 4px;
-      font-size: 1rem;
+      padding: 0.75rem;
+      font-weight: 600;
+      border-radius: 8px;
       cursor: pointer;
       transition: background-color 0.3s;
-      width: 100%;
     }
 
-    button:hover {
-      background-color: #0056b3;
+    .login-box button:hover {
+      background-color: #009933;
+    }
+
+    .error {
+      color: red;
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
     }
   </style>
 </head>
 <body>
-  <img src="WhatsApp Image 2025-05-13 at 8.17.11 PM.jpeg" alt="Logo" class="logo" />
-  <div class="title">COISAS GREEN</div>
-  <div class="subtitle">private channel</div>
-  <div class="followers">20.7K inscritos</div>
+
+  <img src="e7ab9d64-2aad-44f6-b6ea-2a3967cf8119.png" alt="Logo" class="logo">
+  <div class="brand">
+    <h1>COISAS GREEN</h1>
+    <p>private channel <br><span>20.7K inscritos</span></p>
+  </div>
 
   <div class="login-box">
-    <div class="error-message" id="error-msg"></div>
-    <label for="code">Senha</label>
-    <input type="password" id="code" placeholder="senha">
-    <div class="instruction">
-      Certifique-se de que é uma palavra-passe correta e ativada, se for pode prosseguir. O código expira em <strong>10min</strong>
-    </div>
-    <button onclick="validateCode()">Aceder</button>
+    <input type="password" id="password" placeholder="Senha">
+    <p>Certifique-se de que é uma palavra-passe correta e ativada, se for pode prosseguir. O código expira em <strong>10min</strong></p>
+    <div class="error" id="error-message"></div>
+    <button onclick="handleLogin()">Aceder</button>
   </div>
 
   <script>
-    const codes = {
-      "Q!4bL9#r": 365,
-      "M@3zV6*w": 30,
-      "D7$kL2#m": 7
+    const validCodes = {
+      "Q!4bL9#r": 365,  // 1 year
+      "M@3zV6*w": 30,   // 1 month
+      "D7$kL2#m": 7     // 1 week
     };
 
-    function validateCode() {
-      const input = document.getElementById("code").value.trim();
-      const errorBox = document.getElementById("error-msg");
+    function handleLogin() {
+      const input = document.getElementById("password").value;
+      const errorBox = document.getElementById("error-message");
 
-      if (codes[input] !== undefined) {
-        const now = new Date().getTime();
-        const expiry = now + codes[input] * 24 * 60 * 60 * 1000;
-        localStorage.setItem("subscriptionExpiry", expiry);
+      if (validCodes[input]) {
+        const days = validCodes[input];
+        const expiryDate = new Date();
+        expiryDate.setDate(expiryDate.getDate() + days);
+        localStorage.setItem("subscriptionExpiry", expiryDate.toISOString());
         window.location.href = "dashboard.html";
-      } els
+      } else {
+        errorBox.textContent = "Código incorreto ou expirado.";
+      }
+    }
+  </script>
+
+</body>
+</html>
