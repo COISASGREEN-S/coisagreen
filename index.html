@@ -1,4 +1,3 @@
-<!-- =================== LOGIN PAGE =================== -->
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -142,9 +141,9 @@
 
   <script>
     const validCodes = {
-      "Q!4bL9#r": 365,  // 1 year
-      "M@3zV6*w": 30,   // 1 month
-      "D7$kL2#m": 7     // 1 week
+      "Q!4bL9#r": 365,  // 1 ano
+      "M@3zV6*w": 30,   // 1 mês
+      "D7$kL2#m": 7     // 1 semana
     };
 
     function handleLogin() {
@@ -152,15 +151,19 @@
       const errorBox = document.getElementById("error-message");
 
       if (validCodes[input]) {
-        const days = validCodes[input];
-        const expiryDate = new Date();
-        expiryDate.setDate(expiryDate.getDate() + days);
-        localStorage.setItem("subscriptionExpiry", expiryDate.toISOString());
+        const existingExpiry = localStorage.getItem("subscriptionExpiry");
+        if (!existingExpiry) {
+          const days = validCodes[input];
+          const expiryDate = new Date();
+          expiryDate.setDate(expiryDate.getDate() + days);
+          localStorage.setItem("subscriptionExpiry", expiryDate.toISOString());
+        }
         window.location.href = "dashboard.html";
       } else {
         errorBox.textContent = "Código incorreto ou expirado.";
       }
     }
   </script>
+
 </body>
 </html>
