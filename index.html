@@ -30,9 +30,9 @@
     }
 
     .logo {
-      width: 220px;
+      width: 260px;
       animation: float 3s ease-in-out infinite;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
       font-weight: bold;
     }
 
@@ -51,6 +51,7 @@
       width: 100%;
       box-shadow: 0 10px 25px rgba(0, 136, 204, 0.1);
       transition: transform 0.3s ease;
+      text-align: center;
     }
 
     .login-box:hover {
@@ -98,8 +99,22 @@
       margin-top: 1rem;
       font-size: 0.95rem;
       color: #0088cc;
-      text-align: center;
       font-weight: 600;
+    }
+
+    .channel-info strong {
+      display: block;
+      color: black;
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .channel-name {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: black;
+      margin-top: 0.5rem;
     }
   </style>
 </head>
@@ -108,13 +123,14 @@
   <img src="WhatsApp Image 2025-05-13 at 8.17.11 PM.jpeg" alt="Logo" class="logo" />
 
   <div class="login-box">
+    <div class="channel-name">COISAS GREEN VIP GRUPO</div>
+    <div class="channel-info">
+      <strong>Canal Privado</strong>
+      <span style="color: #0088cc;">20.7K inscritos</span>
+    </div>
     <input type="password" id="password" placeholder="Digite seu código de acesso...">
     <div class="error" id="error-message"></div>
     <button onclick="handleLogin()">ATIVAR ACESSO</button>
-    <div class="channel-info">
-      <strong>private channel</strong><br>
-      20.7K inscritos
-    </div>
   </div>
 
   <script>
