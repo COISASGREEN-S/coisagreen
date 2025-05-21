@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Escanear Código QR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #e0f7ff, #f0fbff);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    #reader {
+      width: 300px;
+      margin: auto;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <h2>Escaneie o código QR para acessar o canal VIP</h2>
+  <div id="reader"></div>
+  <div id="result">Esperando escaneamento...</div>
+
+  <script>
+    const resultDiv = document.getElementById("result");
+
+    function onScanSuccess(decodedText, decodedResult) {
+      if (decodedText.startsWith("https://t.me/")) {
+        resultDiv.innerText = "Link detectado! Abrindo canal do Telegram...";
+        setTimeout(() => {
+          window.location.href = decodedText;
+        }, 1000);
+      } else {
+        resultDiv.innerText = "Código inválido. Apenas links do Telegram são permitidos.";
+      }
+
+      html5QrCode.stop().catch(err => {
+        console.error("Erro ao parar a câmera: ", err);
+      });
+    }
+
+    function onScanFailure(error) {
+      // Optionally log scanning failures
+    }
+
+    const html5QrCode = new Html5Qrcode("reader");
+    const config = { fps: 10, qrbox: 250 };
+
+    Html5Qrcode.getCameras().then(cameras => {
+      if (cameras && cameras.length) {
+        html5QrCode.start(
+          { facingMode: "environment" },
+          config,
+          onScanSuccess,
+          onScanFailure
+        );
+      } else {
+        resultDiv.innerText = "Nenhuma câmera encontrada.";
+      }
+    }).catch(err => {
+      resultDiv.innerText = `Erro ao acessar a câmera: ${err}`;
+    });
+  </script>
+</body>
+</html>
