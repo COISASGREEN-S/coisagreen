@@ -1,0 +1,159 @@
+<!-- =================== LOGIN PAGE =================== -->
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>COISAS - Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #ffffff, #ffffff);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      width: 260px;
+      animation: float 3s ease-in-out infinite;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+      100% { transform: translateY(0); }
+    }
+
+    .login-box {
+      background: white;
+      border: 2px solid #0088cc;
+      border-radius: 10px;
+      padding: 2rem;
+      max-width: 350px;
+      width: 100%;
+      box-shadow: 0 10px 25px rgba(0, 136, 204, 0.1);
+      transition: transform 0.3s ease;
+      text-align: center;
+    }
+
+    .login-box:hover {
+      transform: translateY(-2px);
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1.5px solid #0088cc;
+      border-radius: 8px;
+      margin-top: 0.5rem;
+      transition: border-color 0.3s;
+    }
+
+    .login-box input:focus {
+      border-color: #006699;
+      outline: none;
+    }
+
+    .login-box button {
+      margin-top: 1rem;
+      width: 100%;
+      background-color: #0088cc;
+      color: white;
+      border: none;
+      padding: 0.75rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .login-box button:hover {
+      background-color: #006699;
+    }
+
+    .error {
+      color: red;
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    .channel-info {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      color: #0088cc;
+      font-weight: 600;
+    }
+
+    .channel-info strong {
+      display: block;
+      color: black;
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .channel-name {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: black;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <img src="WhatsApp Image 2025-05-13 at 8.17.11 PM.jpeg" alt="Logo" class="logo" />
+
+  <div class="login-box">
+    <div class="channel-name">COISAS GREEN VIP GRUPO</div>
+    <div class="channel-info">
+      <strong>Canal Privado</strong>
+      <span style="color: #0088cc;">20.7K inscritos</span>
+    </div>
+    <input type="password" id="password" placeholder="Digite seu código de acesso...">
+    <div class="error" id="error-message"></div>
+    <button onclick="handleLogin()">ATIVAR ACESSO</button>
+  </div>
+
+  <script>
+    const validCodes = {
+      "Q!4bL9#r": 365,
+      "M@3zV6*w": 30,
+      "D7$kL2#m": 7
+    };
+
+    function handleLogin() {
+      const input = document.getElementById("password").value;
+      const errorBox = document.getElementById("error-message");
+
+      if (validCodes[input]) {
+        const days = validCodes[input];
+        const expiryDate = new Date();
+        expiryDate.setDate(expiryDate.getDate() + days);
+        localStorage.setItem("subscriptionExpiry", expiryDate.toISOString());
+        window.location.href = "dashboard.html";
+      } else {
+        errorBox.textContent = "Código incorreto ou expirado.";
+      }
+    }
+  </script>
+</body>
+</html>

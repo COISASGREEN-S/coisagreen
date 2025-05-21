@@ -1,9 +1,8 @@
-<!-- =================== DASHBOARD PAGE =================== -->
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>COISAS - Painel</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
@@ -23,7 +22,6 @@
 
     header {
       background-color: #ffffff;
-      color: white;
       padding: 1rem 2rem;
       display: flex;
       flex-direction: column;
@@ -48,13 +46,6 @@
       color: black;
       font-size: 1.2rem;
       font-weight: 600;
-    }
-
-    .subscription-timer {
-      color: black;
-      font-size: 1rem;
-      margin-top: 0.5rem;
-      font-weight: 500;
     }
 
     main {
@@ -102,68 +93,29 @@
   <header>
     <img src="WhatsApp Image 2025-05-13 at 8.17.11 PM.jpeg" alt="Logo" class="logo" />
     <div class="welcome">Bem-vindo ao Painel COISAS</div>
-    <div class="subscription-timer">
-      Sua assinatura expira em: <span id="countdown">Carregando...</span>
-    </div>
   </header>
 
   <main>
-    <a href="lock.html" class="card">
-      <h3>Previsões Recentes</h3>
-      <p>Confira as melhores dicas de apostas e análises do dia.</p>
+    <a href="timer.html" class="card">
+      <h3>Status da Assinatura</h3>
+      <p>Veja quanto tempo resta da sua assinatura ativa.</p>
     </a>
-    <a href="lock.html" class="card">
-      <h3>Informações da Conta</h3>
-      <p>Veja os detalhes da sua assinatura e status de ativação.</p>
+    <a href="channel.html" class="card">
+      <h3>Canal VIP do Telegram</h3>
+      <p>Entre no canal VIP exclusivo via código QR.</p>
     </a>
-    <a href="lock.html" class="card">
+    <a href="support.html" class="card">
       <h3>Suporte</h3>
-      <p>Precisa de ajuda? Fale com o suporte ou com a administração.</p>
+      <p>Contate a administração por e-mail: Coisasgreen@gmail.com</p>
     </a>
-    <a href="lock.html" class="card">
-      <h3>Acesso Premium</h3>
-      <p>Atualize seu plano para desbloquear conteúdo VIP.</p>
+    <a href="matches.html" class="card">
+      <h3>Partidas Disponíveis</h3>
+      <p>Acompanhe os jogos ao vivo e atualizações em tempo real.</p>
     </a>
   </main>
 
   <footer>
     &copy; 2025 COISAS GRUPO VIP. Todos os direitos reservados.
   </footer>
-
-  <script>
-    function startCountdown() {
-      const countdownEl = document.getElementById("countdown");
-      const expiryStr = localStorage.getItem("subscriptionExpiry");
-
-      if (!expiryStr) {
-        countdownEl.textContent = "Não ativo";
-        return;
-      }
-
-      const expiry = new Date(expiryStr);
-
-      function updateTimer() {
-        const now = new Date();
-        const diff = expiry - now;
-
-        if (diff <= 0) {
-          countdownEl.textContent = "Expirado";
-          return;
-        }
-
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const minutes = Math.floor((diff / (1000 * 60)) % 60);
-        const seconds = Math.floor((diff / 1000) % 60);
-
-        countdownEl.textContent = `${days}d ${hours}h ${minutes}min ${seconds}s`;
-      }
-
-      updateTimer();
-      setInterval(updateTimer, 1000);
-    }
-
-    startCountdown();
-  </script>
 </body>
 </html>
