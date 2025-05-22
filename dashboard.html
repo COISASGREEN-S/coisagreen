@@ -1,10 +1,11 @@
+<!-- =================== DASHBOARD PAGE =================== -->
 <!DOCTYPE html>
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>COISAS - Painel</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     * {
       margin: 0;
@@ -87,9 +88,26 @@
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    .loading-screen {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
+  <div class="loading-screen" id="loadingScreen">Carregando...</div>
+
   <header>
     <img src="WhatsApp Image 2025-05-13 at 8.17.11 PM.jpeg" alt="Logo" class="logo" />
     <div class="welcome">Bem-vindo ao Painel COISAS</div>
@@ -98,24 +116,36 @@
   <main>
     <a href="timer.html" class="card">
       <h3>Status da Assinatura</h3>
-      <p>Veja quanto tempo resta da sua assinatura ativa.</p>
+      <p>Verifique o tempo restante da sua assinatura.</p>
     </a>
     <a href="scan.html" class="card">
-      <h3>Canal VIP do Telegram</h3>
-      <p>Escaneie o código QR com sua câmera para acessar o canal.</p>
-    </a>    
+      <h3>Canal VIP Telegram</h3>
+      <p>Abra sua câmera para escanear o código QR do canal VIP.</p>
+    </a>
     <a href="support.html" class="card">
       <h3>Suporte</h3>
-      <p>Contate a administração por e-mail: Coisasgreen@gmail.com</p>
+      <p>Entre em contato com a administração por e-mail.</p>
     </a>
-    <a href="matches.html" class="card">
+    <a href="#" onclick="openFlashscore(event)" class="card">
       <h3>Partidas Disponíveis</h3>
-      <p>Acompanhe os jogos ao vivo e atualizações em tempo real.</p>
+      <p>Veja os jogos ao vivo e próximos no FlashScore.</p>
     </a>
   </main>
 
   <footer>
     &copy; 2025 COISAS GRUPO VIP. Todos os direitos reservados.
   </footer>
+
+  <script>
+    function openFlashscore(event) {
+      event.preventDefault();
+      const loadingScreen = document.getElementById("loadingScreen");
+      loadingScreen.style.display = "flex";
+
+      setTimeout(() => {
+        window.location.href = "https://www.flashscore.com.ng/";
+      }, 3000);
+    }
+  </script>
 </body>
 </html>
